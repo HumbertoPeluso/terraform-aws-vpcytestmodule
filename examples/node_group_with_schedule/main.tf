@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "eks" {
-  source  = "gitlab.com/vkpr/terraform-aws-eks/aws"
+  source  = "HumbertoPeluso/terraform-aws-vpcytestmodule"
   version = "~> 1.3.0"
 
   cluster_name    = "eks-example"
