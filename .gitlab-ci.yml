@@ -1,0 +1,15 @@
+include:
+  - project: vkpr/templates
+    file: Module-Upload.gitlab-ci.yml
+
+stages:
+  - upload
+
+upload:
+  extends: .terraform_module_upload
+  stage: upload
+  variables:
+    TERRAFORM_MODULE_NAME: ${CI_PROJECT_NAME}
+    TERRAFORM_MODULE_PROVIDER: aws
+  rules:
+    - if: $CI_COMMIT_TAG
