@@ -1,4 +1,8 @@
 locals {
+
+  cluster_name                      = coalescelist(aws_eks_cluster.this[*].name, [""])[0]
+  cluster_auth_base64               = coalescelist(aws_eks_cluster.this[*].certificate_authority[0].data, [""])[0]
+  cluster_endpoint                  = coalescelist(aws_eks_cluster.this[*].endpoint, [""])[0]
   # IAM
   iam_cluster_role_name        = var.iam_cluster_role_name != "" ? var.iam_cluster_role_name : null
   iam_cluster_role_name_prefix = var.iam_cluster_role_name != "" ? null : var.cluster_name

@@ -9,15 +9,18 @@ variable "tags" {
 variable "cidr_block" {
   description = "Bloco CIDR do VPC."
   type        = string
+  default = "10.50.0.0/16"
 }
 variable "public_subnets" {
   description = "Lista de subnets públicas criadas na VPC."
   type        = list(string)
+  default = ["10.50.4.0/24", "10.50.5.0/24", "10.50.6.0/24"]
 }
 
 variable "private_subnets" {
   description = "Lista de subnets privadas criadas na VPC."
   type        = list(string)
+  default = ["10.50.1.0/24", "10.50.2.0/24", "10.50.3.0/24"]
 }
 
 # Cluster
@@ -77,6 +80,12 @@ variable "cluster_delete_timeout" {
   description = "Timeout da destruição do cluster EKS."
   type        = string
   default     = "15m"
+}
+
+variable "create_eks" {
+  description = "Controls if EKS resources should be created (it affects almost all resources)"
+  type        = bool
+  default     = true
 }
 
 # Node Groups
@@ -160,3 +169,16 @@ variable "kubeconfig_aws_authenticator_env_variables" {
   type        = map(string)
   default     = {}
 }
+
+variable "kubeconfig_name" {
+  description = "Override the default name used for items kubeconfig."
+  type        = string
+  default     = ""
+}
+
+variable "cluster_endpoint_private_access_cidrs" {
+  description = "List of CIDR blocks which can access the Amazon EKS private API server endpoint. To use this `cluster_endpoint_private_access` and `cluster_create_endpoint_private_access_sg_rule` must be set to `true`."
+  type        = list(string)
+  default     = null
+}
+
